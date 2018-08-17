@@ -4,7 +4,6 @@ import com.nf.bookstore1.dao.BookDAO;
 import com.nf.bookstore1.dao.BookInMemoryDAO;
 import com.nf.bookstore1.entity.Book;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +22,8 @@ public class BookAdd extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         float price = Float.parseFloat(req.getParameter("price"));

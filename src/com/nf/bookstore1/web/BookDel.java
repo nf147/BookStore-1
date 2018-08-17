@@ -23,7 +23,9 @@ public class BookDel extends HttpServlet {
             msg = "delete failure.";
         }
         //req.getRequestDispatcher("/index").forward(req, resp);
-        resp.sendRedirect("/index?msg=" + msg);
+        req.getSession().setAttribute("msg", msg);
+
+        resp.sendRedirect("/index");
     }
 
     @Override
@@ -34,6 +36,9 @@ public class BookDel extends HttpServlet {
         for (String id : ids) {
             dao.delete(Integer.parseInt(id));
         }
+
+        req.getSession().setAttribute("msg", "删除成功。");
+
         // req.getRequestDispatcher("/index").forward(req,resp);
         resp.sendRedirect("/index");
     }

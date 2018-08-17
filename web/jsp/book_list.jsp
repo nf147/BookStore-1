@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.nf.bookstore1.entity.Book" %>
+<%@ page import="util.WebUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,21 +19,15 @@
 </head>
 <body>
 
-<%
-    String msg = (String) request.getAttribute("msg");
+<%= WebUtil.popSessionMsg(request) %>
 
-    if(msg != null && !msg.isEmpty()) {
-%>
-
-<div style="border: 1px solid red; background: pink; margin-bottom: 2em;">
-    <%= request.getAttribute("msg") %>
-</div>
-
-<% } %>
+<form action="/q">
+    <input type="text" placeholder="查询条件(名字)" name="condition">
+    <input type="submit" value="搜索">
+</form>
 
 <form action="/del" method="post">
     <table>
-
         <tr>
             <th><input type="checkbox" onclick="alls(this)"></th>
             <th>id</th>
@@ -59,7 +54,10 @@
             </td>
             <td><%= book.getPress() %>
             </td>
-            <td><a href="/del?id=<%= book.getId() %>">删除</a></td>
+            <td>
+                <a href="/del?id=<%= book.getId() %>">删除</a>
+                <a href="/update?id=<%= book.getId() %>">更新</a>
+            </td>
         </tr>
         <%
             }
